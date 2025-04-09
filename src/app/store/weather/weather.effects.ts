@@ -32,7 +32,10 @@ export class WeatherEffects {
       mergeMap(action =>
         this.weatherService.getWeatherForLocations(action.locations).pipe(
           map(
-            weatherResponse => WeatherActions.loadWeatherForLocationsSuccess({ weatherResponse: weatherResponse.list })
+            weatherResponse => {
+              console.log("Weather response is ", weatherResponse);
+              
+              return WeatherActions.loadWeatherForLocationsSuccess({ weatherResponse: weatherResponse.list })}
           ),
           catchError(error => of(WeatherActions.loadWeatherForLocationsFailure({ error })))
         )

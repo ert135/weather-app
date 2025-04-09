@@ -6,16 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { WeatherEffects } from './store/weather/weather.effects';
-import { StoreModule } from '@ngrx/store';
+import { provideStore, StoreModule } from '@ngrx/store';
 import { weatherReducer } from './store/weather/weather.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(
-      StoreModule.forRoot({ weather: weatherReducer }),
-      HttpClientModule
-    ),
+    importProvidersFrom(HttpClientModule),
+    provideStore({ weather: weatherReducer }), 
     provideEffects([WeatherEffects]),
     provideStoreDevtools({
       maxAge: 25,
