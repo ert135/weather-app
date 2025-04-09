@@ -1,0 +1,11 @@
+<div *ngIf="items?.length; else empty">
+  <div *ngFor="let item of items">
+    <ng-container
+      *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #empty>
+  <p>No items to display.</p>
+</ng-template>
