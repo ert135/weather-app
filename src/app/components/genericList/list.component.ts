@@ -1,13 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'list-component',
-  // It makes sense for tihs component to be standalone as its generic and not linked to a module
+  imports: [CommonModule],
   standalone: true,
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListingComponent<T> {
+  /**
+   * This is an example of how we can use genertic types to reuse rendering logic, this class can be used to render any data that's in an array.
+   * 
+   * This component could be extended in future to render items in a list, or a flex box, all using a generic interface. 
+  */
   @Input() items: T[] = [];
-  @Input() itemTemplate!: TemplateRef<T>;
+  @Input() itemTemplate!: TemplateRef<{ $implicit: T }>;
 }

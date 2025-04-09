@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+// View model for this component
+export interface CityListItem {
+  cityName: string,
+  temp: string,
+  windSpeed: string
+}
 
 @Component({
   selector: 'app-city-list-item',
   standalone: true,
-  imports: [],
   templateUrl: './city-list-item.component.html',
-  styleUrl: './city-list-item.component.css'
+  styleUrls: ['./city-list-item.component.css']
 })
 export class CityListItemComponent {
-
+  @Input()city!: CityListItem;
 }

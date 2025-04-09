@@ -1,1 +1,13 @@
-<p>main works!</p>
+<ng-template #cityTemplate let-city>
+    <app-city-list-item [city]="city"></app-city-list-item>
+</ng-template>
+
+<ng-template #emptyState>
+    <p>No cities to display.</p>
+</ng-template>
+
+<list-component
+    *ngIf="cities$ | async as cities; else emptyState"
+    [items]="cities"
+    [itemTemplate]="cityTemplate">
+</list-component>
