@@ -19,7 +19,7 @@ describe('WeatherEffects', () => {
       providers: [
         WeatherEffects,
         provideMockActions(() => actions$),
-        { provide: WeatherService, useValue: mockWeatherService } // Provide the mock service
+        { provide: WeatherService, useValue: mockWeatherService }
       ]
     });
 
