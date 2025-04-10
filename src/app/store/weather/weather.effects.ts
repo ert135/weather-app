@@ -12,7 +12,7 @@ export class WeatherEffects {
     private weatherService: WeatherService
   ) {}
 
-  // Gets weather for a single location using lat and lon values
+  // Gets weather for a single location using lat and lon values - just left in as an example 
   public loadWeatherForLocation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeatherActions.loadWeatherForLocation),

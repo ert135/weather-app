@@ -38,12 +38,14 @@ export class MainComponent implements OnInit {
      * 
      * In a real app these values would come from search functionality, allowing users to search for a city and add items to the cities list
      * and maybe save them to local storage and hydrate the state from there.
+     * 
+     * For right now though this just gets a hard coded default list.
     */
+    const defaultLocations = [2643743, 2988507, 2950159, 3169070, 3117735];
     this.cities$.pipe(
       take(1),
-      filter(cities => cities.length === 0)
+      filter(cities => cities.length < defaultLocations.length)
     ).subscribe(() => {
-      const defaultLocations = [2643743, 2988507, 2950159, 3169070, 3117735];
       this.weatherFacade.loadWeatherForLocations(defaultLocations);
     });
   }
