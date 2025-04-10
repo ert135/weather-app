@@ -6,6 +6,10 @@
     <p>No cities to display.</p>
 </ng-template>
 
+<ng-template #errorState>
+    <p *ngIf="error$ | async as error">Error: {{ error }}</p>
+</ng-template>
+
 <list-component
     *ngIf="cities$ | async as cities; else emptyState"
     [items]="cities"

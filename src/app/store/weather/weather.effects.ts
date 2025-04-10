@@ -34,7 +34,6 @@ export class WeatherEffects {
           map(
             weatherResponse => {
               console.log("Weather response is ", weatherResponse);
-              
               return WeatherActions.loadWeatherForLocationsSuccess({ weatherResponse: weatherResponse.list })}
           ),
           catchError(error => of(WeatherActions.loadWeatherForLocationsFailure({ error })))

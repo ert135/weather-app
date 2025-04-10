@@ -4,8 +4,9 @@ import { WeatherFacade } from '../../store/weather/weather.facade';
 import { CommonModule } from '@angular/common';
 import { ListingComponent } from '../../components/genericList/list.component';
 import { RouterOutlet } from '@angular/router';
-import { CityListItem, CityListItemComponent } from '../../components/city-list-item/city-list-item.component';
+import { CityListItemComponent } from '../../components/city-list-item/city-list-item.component';
 import { filter, take } from 'rxjs';
+import { CityListItem } from '../../models/CityListItem.model';
 
 @Component({
   selector: 'app-root',
@@ -17,15 +18,17 @@ import { filter, take } from 'rxjs';
 export class MainComponent implements OnInit {
   /**
    * As explained in weather.facade.ts, this decouples the state model from the presentation model 
-   * via the transformer here. This transforms the state mdoel into a view model 
+   * via the transformer here. This transforms the state model into a view model 
    * thats understood by the list item component.
-   */
+  */
   cities$ = this.weatherFacade.cities$<Array<CityListItem>>((cityList) => cityList.map((cityListItem) => ({
     id: cityListItem.id,
     cityName: cityListItem.name,
     temp: cityListItem.temperature,
     windSpeed: cityListItem.windSpeed
   })));
+
+  error$ = this.weatherFacade.error$;
 
   constructor(private weatherFacade: WeatherFacade) {}
 
@@ -36,7 +39,6 @@ export class MainComponent implements OnInit {
      * In a real app these values would come from search functionality, allowing users to search for a city and add items to the cities list
      * and maybe save them to local storage and hydrate the state from there.
     */
-
     this.cities$.pipe(
       take(1),
       filter(cities => cities.length === 0)

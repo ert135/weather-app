@@ -1,13 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
-// View model for this component
-export interface CityListItem {
-  id: number;
-  cityName: string,
-  temp: string,
-  windSpeed: string
-}
+import { CityListItem } from '../../models/CityListItem.model';
 
 @Component({
   selector: 'app-city-list-item',

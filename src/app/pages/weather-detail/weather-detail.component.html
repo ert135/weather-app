@@ -1,1 +1,21 @@
-<p>weather-detail works!</p>
+
+<div *ngIf="selectedCity$ | async as selectedCity; else loading" class="max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-lg">
+    <div class="flex items-center justify-center space-x-4 mb-8">
+        <h1 class="text-4xl font-semibold text-gray-800">{{ selectedCity.cityName }}</h1>
+    </div>
+    <div class="flex items-center justify-center space-x-4 mb-8">
+        <span class="text-5xl">{{ selectedCity.icon }}</span>
+    </div>
+
+    <div class="space-y-4 text-gray-700">
+        <p class="text-lg"><span class="text-2xl">{{ selectedCity.description }}</span></p>
+        <p class="text-lg"><strong>Current Temperature:</strong> <span class="text-xl"> {{ selectedCity.currentTemp }}</span></p>
+        <p class="text-lg"><strong>Max Temperature:</strong> <span class="text-xl"> {{ selectedCity.max_temp }}</span></p>
+        <p class="text-lg"><strong>Min Temperature:</strong> <span class="text-xl"> {{ selectedCity.min_temp }}</span></p>
+        <p class="text-lg"><strong>Wind Speed:</strong> <span class="text-xl"> {{ selectedCity.windSpeed }}</span></p>
+    </div>
+</div>
+
+<ng-template #loading>
+    <p class="text-center text-gray-600">Loading weather details...</p>
+</ng-template>

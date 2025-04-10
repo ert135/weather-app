@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CityListItemComponent, CityListItem } from './city-list-item.component';
+import { CityListItemComponent } from './city-list-item.component';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 

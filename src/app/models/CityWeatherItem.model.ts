@@ -4,5 +4,12 @@ export interface CityWeatherItem {
     temperature: string,
     windSpeed: string,
     lat: number, 
-    lon: number
+    lon: number,
+    minTemp: string,
+    maxTemp: string,
+    currentWeather: {
+        icon: string,
+        title: string,
+        description: string
+    }
 }

@@ -6,26 +6,56 @@ import { WeatherResponse } from '../../models/WeatherResponse.model';
 export interface WeatherState {
   cityList: Array<CityWeatherItem>;
   loadingCityWeatherList: boolean;
-  loadingWeatherDetailsForCity: boolean;
   error: any;
 };
 
 export const initialState: WeatherState = {
   cityList: [],
   loadingCityWeatherList: true,
-  loadingWeatherDetailsForCity: true,
   error: null
 };
 
 const kelvinToCelsius = (value: number) => Math.floor(value - 273.15);
 
+const weatherIconMap: { [key: string]: string } = {
+  "01d": "☀️", // Clear Sky (Day)
+  "01n": "🌙", // Clear Sky (Night)
+  "02d": "⛅", // Few Clouds (Day)
+  "02n": "☁️", // Few Clouds (Night)
+  "03d": "☁️", // Scattered Clouds (Day)
+  "03n": "☁️", // Scattered Clouds (Night)
+  "04d": "☁️", // Broken Clouds (Day)
+  "04n": "☁️", // Broken Clouds (Night)
+  "09d": "🌧️", // Shower Rain (Day)
+  "09n": "🌧️", // Shower Rain (Night)
+  "10d": "🌦️", // Rain (Day)
+  "10n": "🌧️", // Rain (Night)
+  "11d": "🌩️", // Thunderstorm (Day)
+  "11n": "🌩️", // Thunderstorm (Night)
+  "13d": "❄️", // Snow (Day)
+  "13n": "❄️", // Snow (Night)
+  "50d": "🌫️", // Mist (Day)
+  "50n": "🌫️", // Mist (Night)
+};
+
+function getWeatherEmoji(iconCode: string): string {
+  return weatherIconMap[iconCode] || "❓";
+}
+
 export const weatherResponseToCityWeatherItem = (weatherResponse: WeatherResponse): CityWeatherItem => ({
   id: weatherResponse.id,
   name: weatherResponse.name,
-  temperature: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
   windSpeed: String(weatherResponse.wind.speed) + 'm/s',
   lat: weatherResponse.coord.lat, 
-  lon: weatherResponse.coord.lon
+  lon: weatherResponse.coord.lon,
+  temperature: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
+  minTemp: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
+  maxTemp: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
+  currentWeather: {
+    icon: getWeatherEmoji(weatherResponse.weather[0].icon),
+    title: weatherResponse.weather[0].title,
+    description: weatherResponse.weather[0].description
+  }
 });
 
 /**
@@ -38,28 +68,26 @@ export const weatherResponseToCityWeatherItem = (weatherResponse: WeatherRespons
 export const weatherReducer = createReducer(
   initialState,
   // Reducers for fetching single weather item
-  on(WeatherActions.loadWeatherForLocation, state => ({ ...state, loadingWeatherDetail: true })),
+  on(WeatherActions.loadWeatherForLocation, state => ({ ...state, loadingCityWeatherList: true })),
   on(WeatherActions.loadWeatherForLocationSuccess, (state, { weatherResponse }) => ({
     ...state,
     cityList: [
       ...state.cityList, 
       weatherResponseToCityWeatherItem(weatherResponse)
     ],
-    loadingWeatherDetailsForCity: false
+    loadingCityWeatherList: false
   })),
   on(WeatherActions.loadWeatherForLocationFailure, (state, { error }) => ({
     ...state,
     error,
-    loadingWeatherDetailsForCity: false
+    loadingCityWeatherList: false
   })),
 
   // Reducers for fetching multiple weather item 
   on(WeatherActions.loadWeatherForLocations, state => ({ ...state, loadingCityWeatherList: true })),
   on(WeatherActions.loadWeatherForLocationsSuccess, (state, { weatherResponse }) => ({
     ...state,
-    cityList: [
-      ...weatherResponse.map(weatherResponseToCityWeatherItem)
-    ],
+    cityList: weatherResponse.map(weatherResponseToCityWeatherItem),
     loadingCityWeatherList: false
   })),
   on(WeatherActions.loadWeatherForLocationsFailure, (state, { error }) => ({

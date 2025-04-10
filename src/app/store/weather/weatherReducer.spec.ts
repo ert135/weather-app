@@ -77,21 +77,13 @@ describe('weatherReducer', () => {
     expect(state).toEqual(initialState);
   });
 
-  describe('loadWeatherForLocation', () => {
-    it('should set loadingWeatherDetail to true', () => {
-      const action = WeatherActions.loadWeatherForLocation({ lat: 1, lon: 1 });
-      const state = weatherReducer(initialState, action);
-      expect((state as any).loadingWeatherDetail).toBeTrue();
-    });
-  });
-
   describe('loadWeatherForLocationSuccess', () => {
     it('should add a city item and stop loading', () => {
       const action = WeatherActions.loadWeatherForLocationSuccess({ weatherResponse: mockWeatherResponse });
       const state = weatherReducer(initialState, action);
       expect(state.cityList.length).toBe(1);
       expect(state.cityList[0]).toEqual(weatherResponseToCityWeatherItem(mockWeatherResponse));
-      expect((state as any).loadingWeatherDetailsForCity).toBeFalse();
+      expect((state as any).loadingCityWeatherList).toBeFalse();
     });
   });
 
@@ -101,7 +93,7 @@ describe('weatherReducer', () => {
       const action = WeatherActions.loadWeatherForLocationFailure({ error });
       const state = weatherReducer(initialState, action);
       expect(state.error).toEqual(error);
-      expect((state as any).loadingWeatherDetailsForCity).toBeFalse();
+      expect((state as any).loadingCityWeatherList).toBeFalse();
     });
   });
 

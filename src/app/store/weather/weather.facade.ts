@@ -26,8 +26,6 @@ export class WeatherFacade {
 
   error$ = this.store.select(WeatherSelectors.selectError);
 
-  // cities$ = this.store.select(WeatherSelectors.selectCityList);
-
   constructor(private store: Store) {}
 
   loadWeatherForLocation(lat: number, lon: number) {
