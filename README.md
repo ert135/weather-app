@@ -13,6 +13,11 @@ npm  i --force
 npm run start
 ```
 
+To run tests:
+```bash
+npm run test
+```
+
 Go to http://localhost:4200/
 
 Idea's for future iterations 💡
