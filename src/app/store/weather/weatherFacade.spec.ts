@@ -16,10 +16,16 @@ describe('WeatherFacade', () => {
       temperature: '20°C',
       windSpeed: '5m/s',
       lat: 51.51,
-      lon: -0.13
+      lon: -0.13,
+      minTemp: '15°C',
+      maxTemp: '25°C',
+      currentWeather: {
+        icon: '☀️',
+        title: 'Clear',
+        description: 'clear sky'
+      }
     }
   ];
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [

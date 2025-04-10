@@ -49,8 +49,8 @@ export const weatherResponseToCityWeatherItem = (weatherResponse: WeatherRespons
   lat: weatherResponse.coord.lat, 
   lon: weatherResponse.coord.lon,
   temperature: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
-  minTemp: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
-  maxTemp: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
+  minTemp: String(kelvinToCelsius(weatherResponse.main.temp_min)) + '°C',
+  maxTemp: String(kelvinToCelsius(weatherResponse.main.temp_max)) + '°C',
   currentWeather: {
     icon: getWeatherEmoji(weatherResponse.weather[0].icon),
     title: weatherResponse.weather[0].title,

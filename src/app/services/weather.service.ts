@@ -18,7 +18,6 @@ export class WeatherService {
   }
 
   getWeatherForLocations(locations: Array<number>): Observable<WeatherGroupResponse> {
-    console.log("Endpoint is: ", this.apiRoot + `/data/2.5/group?id={${locations.join(',')}}&appid={${this.api_key}}`);
     return this.http.get<WeatherGroupResponse>(this.apiRoot + `/data/2.5/group?id=${locations.join(',')}&appid=${this.api_key}`);
   }
 

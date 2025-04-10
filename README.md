@@ -2,26 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.15.
 
-## Development server
+## Running 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Note: This project currently has a problem with the tailwind css library dependency - adding --force fixes this for now.
+```bash
+npm  i --force
+```
 
-## Code scaffolding
+```bash
+npm run start
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Go to http://localhost:4200/
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Idea's for future iterations 💡
+- Add city search feature to add items to city list 
+- Fetch a city iamge for the weather detials page
+- Allow users to save a list of cities locally
+- Use a pre-made component library for presentational componments 
+- Add linting/formatting pre commit hooks
+- Fix tailwind dependency issue

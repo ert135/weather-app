@@ -12,7 +12,7 @@ export class ListingComponent<T> {
   /**
    * This is an example of how we can use genertic types to reuse rendering logic, this class can be used to render any data that's in an array.
    * 
-   * This component could be extended in future to render items in a list, or a flex box, all using a generic interface. 
+   * This component could be extended in future to render items in a list, or a flex box across the page, all using a generic interface. 
   */
   @Input() items: T[] = [];
   @Input() itemTemplate!: TemplateRef<{ $implicit: T }>;

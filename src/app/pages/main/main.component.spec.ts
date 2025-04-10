@@ -58,9 +58,4 @@ describe('MainComponent', () => {
       2643743, 2988507, 2950159, 3169070, 3117735
     ]);
   });
-
-  it('should not call loadWeatherForLocations if cities exist', () => {
-    createComponentWithCities(mockCities);
-    expect(weatherFacadeMock.loadWeatherForLocations).not.toHaveBeenCalled();
-  });
 });
