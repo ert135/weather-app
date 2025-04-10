@@ -1,1 +1,9 @@
-<p>city-list-item works!</p>
+<div
+  id="city-{{city.id}}"
+  class="p-6 mb-6 border border-gray-200 rounded-2xl shadow-md bg-white w-full max-w-md cursor-pointer"
+  (click)="goToCityDetails(city.id)"
+>
+  <h3 class="text-2xl font-bold mb-2">{{ city.cityName }}</h3>
+  <p class="text-base text-gray-700 mb-1">🌡️ Temperature: {{ city.temp }}</p>
+  <p class="text-base text-gray-700">💨 Wind Speed: {{ city.windSpeed }}</p>
+</div>

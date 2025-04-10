@@ -17,25 +17,27 @@ export const initialState: WeatherState = {
   error: null
 };
 
+const kelvinToCelsius = (value: number) => Math.floor(value - 273.15);
+
 export const weatherResponseToCityWeatherItem = (weatherResponse: WeatherResponse): CityWeatherItem => ({
   id: weatherResponse.id,
   name: weatherResponse.name,
-  temperature: "100c",
-  windSpeed: '100',
+  temperature: String(kelvinToCelsius(weatherResponse.main.temp)) + '°C',
+  windSpeed: String(weatherResponse.wind.speed) + 'm/s',
   lat: weatherResponse.coord.lat, 
   lon: weatherResponse.coord.lon
 });
 
 /**
  * This essentially acts as a layer to transform our API responses from the open weather api, as well as handle any local state updates,
- * into our state models. 
+ * into our state models, like adding a city etc.
  * 
  * Components will then take these state models, and transform them into component specific models, enhancing their reuse 
  * and decoupling the state and presentation layers. 
  */
 export const weatherReducer = createReducer(
   initialState,
-  // Reducers for fetching single weather item 
+  // Reducers for fetching single weather item
   on(WeatherActions.loadWeatherForLocation, state => ({ ...state, loadingWeatherDetail: true })),
   on(WeatherActions.loadWeatherForLocationSuccess, (state, { weatherResponse }) => ({
     ...state,
@@ -56,7 +58,6 @@ export const weatherReducer = createReducer(
   on(WeatherActions.loadWeatherForLocationsSuccess, (state, { weatherResponse }) => ({
     ...state,
     cityList: [
-      ...state.cityList, 
       ...weatherResponse.map(weatherResponseToCityWeatherItem)
     ],
     loadingCityWeatherList: false

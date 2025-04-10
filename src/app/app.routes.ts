@@ -4,6 +4,6 @@ import { WeatherDetailComponent } from './pages/weather-detail/weather-detail.co
 
 export const routes: Routes = [
     { path: '', component: MainComponent },
-    { path: 'city/:name', component: WeatherDetailComponent },
-    { path: '**', redirectTo: '' } // fallback
+    { path: 'city/:id', component: WeatherDetailComponent },
+    { path: '**', redirectTo: '' }
 ];

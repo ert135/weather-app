@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { WeatherEffects } from './store/weather/weather.effects';
-import { provideStore, StoreModule } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { weatherReducer } from './store/weather/weather.reducer';
 
 export const appConfig: ApplicationConfig = {
