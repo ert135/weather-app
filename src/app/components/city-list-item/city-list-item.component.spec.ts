@@ -9,12 +9,10 @@ describe('CityListItemComponent', () => {
   let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    // Create a spy for the Router
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
-    // Configure the test module
     TestBed.configureTestingModule({
-      imports: [CityListItemComponent],  // Import standalone component here
+      imports: [CityListItemComponent],
       providers: [
         { provide: Router, useValue: routerSpy }
       ]
@@ -23,7 +21,6 @@ describe('CityListItemComponent', () => {
     fixture = TestBed.createComponent(CityListItemComponent);
     component = fixture.componentInstance;
 
-    // Set up the city data
     component.city = { id: 1, cityName: 'Newport', temp: '25°C', windSpeed: '10m/s' };
     fixture.detectChanges();
   });
