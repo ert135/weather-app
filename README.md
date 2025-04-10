@@ -24,6 +24,7 @@ Idea's for future iterations 💡
 - Add city search feature to add items to city list 
 - Fetch a city iamge for the weather detials page
 - Allow users to save a list of cities locally
+- provide 7 day forcast for each city, aswell as daily data
 - Use a pre-made component library for presentational componments 
 - Add linting/formatting pre commit hooks
 - Fix tailwind dependency issue
